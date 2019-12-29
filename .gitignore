@@ -24,6 +24,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/dist
-
+/chapter01_react_setting/node_modules
+/chapter02_react_component/node_module
+/chapter01_react_setting/dist
+/chapter02_react_component/dist
 
