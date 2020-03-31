@@ -11,4 +11,10 @@ app.use(bodyParser.json());
 
 app.set('jwt-secret', config.secret);
 
-app.post
+app.listen(port, () => {
+    console.log(`Server is running at ${port}`);
+});
+
+app.post('/auth/login', (req, res) => {
+    console.log();
+});
