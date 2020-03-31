@@ -26,6 +26,11 @@ yarn-error.log*
 
 /chapter01_react_setting/node_modules
 /chapter02_react_component/node_module
+/chapter03_react_view/node_module
+/chapter03_node_server/node_module
+
 /chapter01_react_setting/dist
 /chapter02_react_component/dist
+/chapter03_react_view/dist
+
 
