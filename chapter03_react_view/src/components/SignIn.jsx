@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useRef} from 'react';
+import Axios from 'axios'
 import {useObserver} from "mobx-react/dist/mobx-react"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -48,10 +49,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+
     const classes = useStyles();
+    const form = useRef();
 
     const onClickSignIn = () => {
-        alert('로그인!');
+        console.log('로그인');
+        form;
+        debugger;
+        Axios.post('http://localhost:3000/auth/login?aaa=ddd', new FormData(form.current))
+            .then()
+            .catch();
     };
 
     return(
@@ -65,7 +73,7 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} noValidate ref={form}>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -93,7 +101,7 @@ export default function SignIn() {
                             label="Remember me"
                         />
                         <Button
-                            type="submit"
+                            type="button"
                             fullWidth
                             variant="contained"
                             color="primary"

@@ -1,20 +1,25 @@
 import React from 'react';
-import SignIn from "./SignIn";
 import Album from "./Album";
-import Store from "../store/store";
+import SignIn from "./SignIn";
+import LoginStore from "../store/LoginStore";
 import {useObserver} from "mobx-react/dist/mobx-react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import AuthRoute from './AuthRoute';
 
 export default function Container() {
 
     return(
         useObserver(() => (
-            <Router>
-                <Switch>
-                    <Route path="/album" exact={true} component={Album} />
-                    <Route path="/SignIn" exact={true} component={SignIn} />
-                </Switch>
-            </Router>
+            <>
+                <Router>
+                    <AuthRoute path="/*"/>
+                    <Switch>
+                        <Route path="/login" exact={true} component={SignIn} />
+                        <Route path="/album" exact={true} component={Album} />
+                    </Switch>
+                </Router>
+            </>
+
         ))
     );
 
