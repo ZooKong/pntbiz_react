@@ -1,6 +1,8 @@
 import React, {useRef} from 'react';
 import Axios from 'axios'
 import {useObserver} from "mobx-react/dist/mobx-react"
+import loginStore from "../store/LoginStore";
+import {Redirect} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -54,12 +56,19 @@ export default function SignIn() {
     const form = useRef();
 
     const onClickSignIn = () => {
-        console.log('로그인');
-        form;
-        debugger;
-        Axios.post('http://localhost:3000/auth/login?aaa=ddd', new FormData(form.current))
-            .then()
-            .catch();
+        Axios.post('http://localhost:3000/auth/login', new FormData(form.current) , {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function ({data}) {
+                if (data.result == 'success'){
+                    loginStore.setLoggedIn(true);
+                    loginStore.setToken(data.token);
+                    console.log('로그인 여부 : ' +loginStore.loggedIn);
+                    console.log('토큰 : ' + loginStore.token);
+                }
+            });
     };
 
     return(
@@ -79,9 +88,9 @@ export default function SignIn() {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
+                            id="id"
                             label="Email Address"
-                            name="email"
+                            name="id"
                             autoComplete="email"
                             autoFocus
                         />
@@ -127,6 +136,7 @@ export default function SignIn() {
                 <Box mt={8}>
                     <Copyright />
                 </Box>
+                {loginStore.loggedIn ? <Redirect to={'/album'}/> : null}
             </Container>
         ))
     );

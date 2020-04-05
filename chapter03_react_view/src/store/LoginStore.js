@@ -2,7 +2,11 @@ import { observable } from 'mobx'
 
 export default observable ({
     loggedIn  : false,
-    setLoggedIn (isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
+    token : null,
+    setLoggedIn(loggedIn) {
+        this.loggedIn = loggedIn;
+    },
+    setToken(token) {
+        this.token = token;
     }
 });

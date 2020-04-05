@@ -1,5 +1,7 @@
 import React from 'react';
+import Axios from 'axios'
 import {useObserver} from "mobx-react/dist/mobx-react";
+import loginStore from "../store/LoginStore";
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -66,6 +68,22 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function Album() {
     const classes = useStyles();
 
+    const verifyToken = () => {
+        let token = loginStore.token;
+
+        Axios.post('http://localhost:3000/auth/verify', null , {
+            headers: {
+                'Content-Type': 'application/json',
+                'token' : token
+            }
+        })
+            .then(function ({data}) {
+                if (data.result == 'success'){
+                    alert('유효한 토큰입니다.')
+                }
+            });
+    }
+
     return(
         useObserver(()=> (
             <>
@@ -93,13 +111,8 @@ export default function Album() {
                             <div className={classes.heroButtons}>
                                 <Grid container spacing={2} justify="center">
                                     <Grid item>
-                                        <Button variant="contained" color="primary">
-                                            Main call to action
-                                        </Button>
-                                    </Grid>
-                                    <Grid item>
-                                        <Button variant="outlined" color="primary">
-                                            Secondary action
+                                        <Button variant="contained" color="primary" onClick={verifyToken}>
+                                            Verify Token
                                         </Button>
                                     </Grid>
                                 </Grid>
