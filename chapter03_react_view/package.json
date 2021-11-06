@@ -12,7 +12,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.8",
     "@material-ui/icons": "^4.9.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "css-loader": "^3.4.0",
     "mobx": "^5.15.1",
     "mobx-react": "^6.1.4",
